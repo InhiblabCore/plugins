@@ -4,7 +4,7 @@ const w = (e, o) => {
   for (const [c, n] of o)
     s[c] = n;
   return s;
-}, T = {}, D = {
+}, T = {}, j = {
   t: "1596458734865",
   class: "icon",
   viewBox: "0 0 1024 1024",
@@ -14,22 +14,22 @@ const w = (e, o) => {
   "xmlns:xlink": "http://www.w3.org/1999/xlink",
   width: "14",
   height: "14"
-}, E = /* @__PURE__ */ t("path", {
+}, D = /* @__PURE__ */ t("path", {
   d: "M68.608 962.56V206.848h740.864V962.56H68.608zM746.496 271.36H131.584v629.248h614.912V271.36zM131.584 262.144",
   "p-id": "4899",
   fill: "#666"
-}, null, -1), H = /* @__PURE__ */ t("path", {
+}, null, -1), E = /* @__PURE__ */ t("path", {
   d: "M219.136 65.024v116.224h62.976V129.536h614.912v629.248h-60.416v61.952h123.392V65.024z",
   "p-id": "4900",
   fill: "#666"
-}, null, -1), O = [
-  E,
-  H
+}, null, -1), H = [
+  D,
+  E
 ];
-function U(e, o) {
-  return r(), _("svg", D, O);
+function O(e, o) {
+  return r(), _("svg", j, H);
 }
-const b = /* @__PURE__ */ w(T, [["render", U]]), j = {}, N = {
+const U = /* @__PURE__ */ w(T, [["render", O]]), b = {}, N = {
   t: "1596458647160",
   class: "icon",
   viewBox: "0 0 1024 1024",
@@ -49,7 +49,7 @@ const b = /* @__PURE__ */ w(T, [["render", U]]), j = {}, N = {
 function J(e, o) {
   return r(), _("svg", N, I);
 }
-const P = /* @__PURE__ */ w(j, [["render", J]]), F = ["href"], A = /* @__PURE__ */ t("div", { style: { width: "16px", "margin-left": "6px" } }, [
+const P = /* @__PURE__ */ w(b, [["render", J]]), F = ["href"], A = /* @__PURE__ */ t("div", { style: { width: "16px", "margin-left": "6px" } }, [
   /* @__PURE__ */ t("svg", {
     version: "1.1",
     id: "Layer_1",
@@ -124,7 +124,7 @@ const Q = { class: "demo-slot vp-raw" }, W = { class: "demo-title-desc" }, X = {
     lang: { default: "vue" },
     defaultExpand: { type: Boolean, default: !1 },
     importMap: { default: () => ({
-      "vue-hooks-plus": "https://unpkg.com/vue-hooks-plus@1.4.0/dist/js/index.es.js"
+      "vue-hooks-plus": "https://cdn.jsdelivr.net/npm/vue-hooks-plus/dist/js/index.es.js"
     }) }
   },
   setup(e) {
@@ -157,7 +157,7 @@ const Q = { class: "demo-slot vp-raw" }, W = { class: "demo-title-desc" }, X = {
                   d(t("span", st, "\u590D\u5236\u6210\u529F!", 512), [
                     [a, l(s)]
                   ]),
-                  d(h(b, {
+                  d(h(U, {
                     onClick: l(c),
                     title: "\u590D\u5236"
                   }, null, 8, ["onClick"]), [
