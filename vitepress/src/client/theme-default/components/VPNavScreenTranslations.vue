@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useData } from 'vitepress'
+import { ref } from 'vue'
 import VPIconChevronDown from './icons/VPIconChevronDown.vue'
 import VPIconLanguages from './icons/VPIconLanguages.vue'
 
@@ -11,10 +11,37 @@ const isOpen = ref(false)
 function toggle() {
   isOpen.value = !isOpen.value
 }
+
+const computedLINK = (link_: string) => {
+  const origin = window.location.origin
+  const pathname = window.location.pathname.replace('/', '')
+
+  let path = ''
+  if (link_ === '/') {
+    path = `${origin}/docs/hooks/${pathname
+      .replace('docs/hooks/', '')
+      ?.replace('en/', '')}`
+  }
+  if (link_ === '/en/') {
+    path = `${origin}/docs/hooks/en/${pathname.replace('docs/hooks/', '')}`
+  }
+
+  return path
+}
+
+const isActiveLink = (link: string) => {
+  if (link === '/en/') return window.location.pathname.includes('/en/')
+  if (link === '/') return !window.location.pathname.includes('/en/')
+  return true
+}
 </script>
 
 <template>
-  <div v-if="theme.localeLinks" class="VPNavScreenTranslations" :class="{ open: isOpen }">
+  <div
+    v-if="theme.localeLinks"
+    class="VPNavScreenTranslations"
+    :class="{ open: isOpen }"
+  >
     <button class="title" @click="toggle">
       <VPIconLanguages class="icon lang" />
       {{ theme.localeLinks.text }}
@@ -22,8 +49,19 @@ function toggle() {
     </button>
 
     <ul class="list">
-      <li v-for="locale in theme.localeLinks.items" :key="locale.link" class="item">
-        <a class="link" :href="locale.link">{{ locale.text }}</a>
+      <li
+        v-for="locale in theme.localeLinks.items"
+        :key="locale.link"
+        class="item"
+      >
+        <a
+          :class="{
+            link: true,
+            active: isActiveLink(locale.link)
+          }"
+          :href="computedLINK(locale.link)"
+          >{{ locale.text }}</a
+        >
       </li>
     </ul>
   </div>
@@ -69,5 +107,9 @@ function toggle() {
   line-height: 32px;
   font-size: 13px;
   color: var(--vp-c-text-1);
+}
+
+.link.active {
+  color: var(--vp-c-brand);
 }
 </style>

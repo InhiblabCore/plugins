@@ -1,20 +1,38 @@
 <script lang="ts" setup>
-import { useData } from 'vitepress'
-import { isActive } from '../support/utils'
+import { useRoute } from 'vitepress'
 import VPLink from './VPLink.vue'
 
 defineProps<{
   item: any
 }>()
 
-const { page } = useData()
+const route = useRoute()
+
+const after = () => {
+  let str = route.path
+  if (str.includes('/docs/hooks/')) {
+    str = str.replace('/docs/hooks/', '')
+    const path = str?.replace('en/', '')
+    return path
+  }
+  const path = str?.replace('/', '')?.replace('en/', '')
+  return path
+}
+
+const isActiveLink = (path: string, link: string) => {
+  if (link === '/en/') return path.includes('/en/')
+  if (link === '/') return !path.includes('/en/')
+  return true
+}
 </script>
 
 <template>
   <div class="VPMenuLink">
-    <VPLink 
-      :class="{ active: isActive(page.relativePath, item.activeMatch || item.link) }"
-      :href="item.link"
+    <VPLink
+      :class="{
+        active: isActiveLink(route.path, item.link)
+      }"
+      :href="`${item.link}${after()}`"
     >
       {{ item.text }}
     </VPLink>
