@@ -59,7 +59,11 @@ const isActiveLink = (link: string) => {
             link: true,
             active: isActiveLink(locale.link)
           }"
-          :href="computedLINK(locale.link)"
+          :href="
+            isActiveLink(locale.link)
+              ? 'javascript:'
+              : computedLINK(locale.link)
+          "
           >{{ locale.text }}</a
         >
       </li>
