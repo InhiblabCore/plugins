@@ -33,23 +33,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
         };
     };
 }, {
-    props: {
-        code: string;
-        highlightedCode: string;
-        title?: string | undefined;
-        desc?: string | undefined;
-        lang: string;
-        defaultExpand: boolean;
-        importMap: Record<string, string>;
-    };
+    props: any;
     showTip: import("vue").Ref<boolean>;
     copyCode: () => void;
     decodedCode: import("vue").ComputedRef<string>;
     decodedHighlightedCode: import("vue").ComputedRef<string>;
     expand: import("vue").Ref<boolean>;
     toggleExpand: () => boolean;
-    copySvg: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, import("vue").EmitsOptions, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
-    codeSvg: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, import("vue").EmitsOptions, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
+    copySvg: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
+    codeSvg: import("vue").DefineComponent<{}, {}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>;
     SfcPlayground: import("vue").DefineComponent<{
         content: {
             type: StringConstructor;
@@ -61,12 +53,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         };
     }, {
         sfcBaseUrl: string;
-        props: {
-            content: string;
-            importMap: Record<string, string>;
-        };
+        props: any;
         sfcPlaygroundUrl: import("vue").ComputedRef<string>;
-    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
         content: {
             type: StringConstructor;
             required: true;
@@ -76,7 +65,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             required: true;
         };
     }>>, {}>;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     code: {
         type: StringConstructor;
         required: true;
