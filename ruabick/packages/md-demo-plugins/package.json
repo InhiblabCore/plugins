@@ -1,0 +1,36 @@
+{
+  "name": "@ruabick/md-demo-plugins",
+  "version": "0.3.1",
+  "license": "MIT",
+  "bin": {},
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "unbuild"
+  },
+  "keywords": [],
+  "author": "dewfall123",
+  "dependencies": {
+    "@ruabick/utils": "workspace:^0.3.1",
+    "fs-extra": "^10.1.0",
+    "markdown-it": "^13.0.1",
+    "vitepress": "1.0.0-alpha.29"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/markdown-it": "^12.2.3",
+    "unbuild": "^0.7.6"
+  }
+}

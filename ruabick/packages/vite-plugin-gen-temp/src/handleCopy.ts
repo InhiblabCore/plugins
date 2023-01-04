@@ -85,7 +85,11 @@ async function resolveFrontmatter(path: string, tempDir: string, dir: string) {
           `${base}${str.slice(0, str.lastIndexOf('/'))}/index.ts`,
         ],
 
-    [isCN ? '文档' : 'Demo', `${base}${path}`],
+    [isCN ? '文档' : 'Docs', `${base}${path}`],
+    [
+      isCN ? '示例' : 'Demo',
+      `${base}${str.slice(0, str.lastIndexOf('/'))}/demo`,
+    ],
   ]
     .filter((i) => i)
     .map((i) => `[${i![0]}](${i![1]})`)
