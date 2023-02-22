@@ -30,6 +30,7 @@ const closeSideBar = inject('close-sidebar') as () => void
   padding: 4px 0;
   color: var(--vp-c-text-2);
   transition: color 0.5s;
+  padding-left: 6px;
 }
 
 .link:hover {
@@ -38,6 +39,9 @@ const closeSideBar = inject('close-sidebar') as () => void
 
 .link.active {
   color: var(--vp-c-brand);
+  padding-left: 6px;
+  border-radius: 6px;
+  background-color: var(--vp-c-bg-mute);
 }
 
 .link :deep(.icon) {
