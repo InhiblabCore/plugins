@@ -54,89 +54,70 @@ const checkDestFileExist = async (path: string, destPath) => {
   return !exist;
 };
 
-async function resolveFrontmatter(path: string, tempDir: string, dir: string) {
-  // TODO cache it
-  const originalContent = await fsExtra.readFile(path, 'utf-8');
+async function resolveFrontmatter(path, tempDir, dir) {
+  const originalContent = await fsExtra.readFile(path, "utf-8");
   const { content, data: frontmatter } = matter(originalContent);
-
   const realPath = path;
   let finnalPath;
   let mappingPath = frontmatter.mapping?.path ?? frontmatter.map?.path;
-
   if (mappingPath) {
-    if (!mappingPath.endsWith('.md')) {
+    if (!mappingPath.endsWith(".md")) {
       mappingPath = join(mappingPath, basename(path));
     }
     finnalPath = mappingPath;
   } else {
-    finnalPath = path.replace(new RegExp(`^${dir}`), '');
+    finnalPath = path.replace(new RegExp(`^${dir}`), "");
   }
-
   const str = path;
-  const isDocs = str.includes('/docs');
-  const isCN = str.includes('zh-CN');
-  const base =
-    'https://github.com/InhiblabCore/vue-hooks-plus/tree/master/packages/hooks/';
+  const isCN = str.includes("zh-CN");
+  const base = "https://github.com/InhiblabCore/vue-hooks-plus/tree/master/packages/hooks/";
+  const sourceShow = frontmatter?.source?.show ?? true;
+  const sourcePath = frontmatter?.source?.path ?? `${base}${str.slice(0, str.lastIndexOf("/"))}/index.ts`;
+  const sourceDocPath = frontmatter?.source?.docPath ?? `${base}${path}`;
+  const sourceDemoPath = frontmatter?.source?.demoPath ?? `${base}${str.slice(0, str.lastIndexOf("/"))}/demo`;
+  const showSource = frontmatter?.source?.showSource ?? true;
+  const showDocs = frontmatter?.source?.showDocs ?? true;
+  const showDemo = frontmatter?.source?.showDemo ?? true;
   const links = [
-    isDocs
-      ? undefined
-      : [
-          isCN ? '源码' : 'Source',
-          `${base}${str.slice(0, str.lastIndexOf('/'))}/index.ts`,
-        ],
+    showSource ? [isCN ? "\u6E90\u7801" : "Source", sourcePath] : void 0,
+    showDocs ? [isCN ? "\u6587\u6863" : "Docs", sourceDocPath] : void 0,
+    showDemo ? [isCN ? "\u793A\u4F8B" : "Demo", sourceDemoPath] : void 0
+  ].filter((i) => i).map((i) => `[${i[0]}](${i[1]})`).join(" \u2022 ");
+  const sourceSection = `## Source
 
-    [isCN ? '文档' : 'Docs', `${base}${path}`],
-    [
-      isCN ? '示例' : 'Demo',
-      `${base}${str.slice(0, str.lastIndexOf('/'))}/demo`,
-    ],
-  ]
-    .filter((i) => i)
-    .map((i) => `[${i![0]}](${i![1]})`)
-    .join(' • ');
+${links}
+`;
+  const processContent = mappingPath && sourceShow ? `${content}
 
-  const sourceSection = `## Source\n\n${links}\n`;
-
-  const processContent = mappingPath
-    ? `${content}\n\n${sourceSection}`
-    : content;
-
+${sourceSection}` : content;
   const finnalContent = matter.stringify(processContent, {
-    ...(frontmatter ?? {}),
-    realPath,
+    ...frontmatter ?? {},
+    realPath
   });
-
   return {
     finnalPath,
-    finnalContent,
+    finnalContent
   };
 }
-
-function handleLangSuffix(path: string, localeConfigs: LocaleConfigs) {
+function handleLangSuffix(path, localeConfigs) {
   const { defaultLang, langToPathMap } = localeConfigs;
   if (!Object.keys(langToPathMap).length) {
     return path;
   }
-
   const fileName = basename(path);
   const dir = dirname(path);
-  const fileNameWithoutMd = fileName.replace(/\.md$/, '');
-
+  const fileNameWithoutMd = fileName.replace(/\.md$/, "");
   const fileExtname = extname(fileNameWithoutMd);
   const langSuffix = fileExtname.slice(1) || defaultLang;
-
   const langPath = langToPathMap[langSuffix];
   if (!langPath) {
     console.log(
       yellow(
-        `${fileName} has a ${fileExtname} suffix. But ${langSuffix} not defined in locales`,
-      ) + dim(` .vitepress.config.js`),
+        `${fileName} has a ${fileExtname} suffix. But ${langSuffix} not defined in locales`
+      ) + dim(` .vitepress.config.js`)
     );
     return path;
   }
-
-  const fileNameWithoutLangSuffix =
-    fileNameWithoutMd.slice(0, -fileExtname.length || undefined) + '.md';
-
+  const fileNameWithoutLangSuffix = fileNameWithoutMd.slice(0, -fileExtname.length || void 0) + ".md";
   return join(langPath, dir, fileNameWithoutLangSuffix);
 }
